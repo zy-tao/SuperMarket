@@ -14,4 +14,11 @@ public interface UserService {
     public SmbmsUser getUserByUserCode(String userCode);
     public List<SmbmsUser> getSmbmsUserByPage(int currentPage,int size,String queryname,String queryUserRole);
 
+    public int getCountByPage(String queryname,String queryUserRole);
+
+    public void delSmbmsUserById (String id);
+
+    public SmbmsUser getSmbmsUserById (String id);
+
+    public void addUser(SmbmsUser smbmsUser);
 }

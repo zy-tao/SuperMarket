@@ -1,4 +1,4 @@
-package com.zyt.servlet;
+package com.zyt.servlet.smbmsuser;
 
 import com.zyt.entity.SmbmsUser;
 import com.zyt.service.SmbmsRoleService;
@@ -45,12 +45,14 @@ public class UserListServlet extends HttpServlet {
         UserService userService = new UserServiceImpl();
         List<SmbmsUser> smbmsUserList = userService.getSmbmsUserByPage(currentPageNo, 5,queryname,queryUserRole);
         HttpSession httpSession = req.getSession();
+        int totalCount = userService.getCountByPage(queryname,queryUserRole);
         SmbmsRoleService smbmsRoleService = new SmbmsRoleServiceImpl();
         List<SmbmsUser> smbmsRoleAll = smbmsRoleService.getSmbmsRoleAll();
+        int totalPagecount = totalCount%5==0?totalCount/5:totalCount/5+1;
         httpSession.setAttribute("roleList",smbmsRoleAll);
         httpSession.setAttribute("userList",smbmsUserList);
-        httpSession.setAttribute("totalPageCount",5);
-        httpSession.setAttribute("totalCount",100);
+        httpSession.setAttribute("totalPageCount",totalPagecount);
+        httpSession.setAttribute("totalCount",totalCount);
         httpSession.setAttribute("currentPageNo",currentPageNo);
         //查询数据库
 
